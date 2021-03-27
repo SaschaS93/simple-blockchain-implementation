@@ -23,7 +23,6 @@ class SimpleProofOfWork implements Consensus {
             nonce++;
             hash = HashUtils.stringToSha256String(block.getHash() + nonce);
         }
-        // return hash;
     }
 
 }

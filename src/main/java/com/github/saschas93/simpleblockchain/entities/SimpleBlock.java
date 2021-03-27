@@ -1,6 +1,7 @@
 package com.github.saschas93.simpleblockchain.entities;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.github.saschas93.simpleblockchain.util.HashUtils;
 
@@ -16,11 +17,14 @@ class SimpleBlock implements Block {
 
     private Object data;
 
-    public SimpleBlock(long index, Timestamp timestamp, String previousHash, Object data) {
+    private List<Transaction> transactions;
+
+    SimpleBlock(long index, Timestamp timestamp, String previousHash, Object data, List<Transaction> transactions) {
         this.index = index;
         this.timestamp = timestamp;
         this.previousHash = previousHash;
         this.data = data;
+        this.transactions = transactions;
         this.hash = this.createHash();
     }
 
@@ -31,6 +35,7 @@ class SimpleBlock implements Block {
             + ':' + this.timestamp.toString() 
             + ':' + this.previousHash 
             + ':' + HashUtils.objectToSha256String(this.data)
+            + ':' + HashUtils.objectToSha256String(this.transactions)
         );
     }
 
@@ -57,6 +62,11 @@ class SimpleBlock implements Block {
     @Override
     public Object getData() {
         return this.data;
+    }
+
+    @Override
+    public List<Transaction> getTransactions() {
+        return this.transactions;
     }
     
 }

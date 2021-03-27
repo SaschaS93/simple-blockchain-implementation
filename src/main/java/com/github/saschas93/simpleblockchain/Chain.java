@@ -1,7 +1,12 @@
 package com.github.saschas93.simpleblockchain;
 
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.SecureRandom;
+import java.security.spec.ECGenParameterSpec;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -11,18 +16,25 @@ import com.github.saschas93.simpleblockchain.entities.Block;
 import com.github.saschas93.simpleblockchain.entities.BlockBuilder;
 import com.github.saschas93.simpleblockchain.entities.Transaction;
 import com.github.saschas93.simpleblockchain.entities.TransactionBuilder;
+import com.github.saschas93.simpleblockchain.wallet.Wallet;
+import com.github.saschas93.simpleblockchain.wallet.WalletFactory;
 
 public class Chain {
 
     private final static long REWARD = 1;
 
-    private final static String REWARD_ADDRESS = "SaschaS93";
+    private Wallet wallet;
 
     private List<Block> chain = new ArrayList<Block>();
 
     private List<Transaction> pendingTransactions = new ArrayList<Transaction>();
 
     private Consensus consensus = ConsensusFactory.createSimpleProofOfWork();
+
+    public Chain() {
+        // TODO: Wallet created dynamically for testing here
+        this.wallet = WalletFactory.createSimpleWallet();
+    }
 
     public void addBlock(String data) {
         String previousHash = "";
@@ -49,26 +61,21 @@ public class Chain {
         this.pendingTransactions.clear();
     }
 
-    public void addTransaction(String fromAddress, String toAddress, long amount) {
-        if (this.getBalance(fromAddress) < amount || amount < 1) {
+    public void addTransaction(Transaction transaction) {
+        if (this.getBalance(transaction.getFromAddress()) < transaction.getAmount() || transaction.getAmount() < 1 || !transaction.isValid()) {
             // Discard transaction
             return;
         }
 
         this.addMiningRewardTransaction();
-        this.pendingTransactions.add(new TransactionBuilder()
-                                        .fromAddress(fromAddress)
-                                        .toAddress(toAddress)
-                                        .amount(amount)
-                                        .buildSimpleTransaction()
-                                    );
+        this.pendingTransactions.add(transaction);
     }
 
     private void addMiningRewardTransaction() {
         if (this.pendingTransactions.size() <= 0) {
             this.pendingTransactions.add(new TransactionBuilder()
                                             .fromAddress("")
-                                            .toAddress(REWARD_ADDRESS)
+                                            .toAddress(this.wallet.getPublicKey())
                                             .amount(REWARD)
                                             .buildSimpleTransaction()
                                         );
@@ -101,6 +108,10 @@ public class Chain {
             previousHash = block.getHash();
         }
         return true;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
     }
 
 }

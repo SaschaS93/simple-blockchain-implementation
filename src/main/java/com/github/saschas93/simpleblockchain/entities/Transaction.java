@@ -6,8 +6,6 @@ public interface Transaction {
 
     public void sign(String privateKey);
 
-    public boolean isValid();
-
     public String getFromAddress();
 
     public String getToAddress();

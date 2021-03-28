@@ -11,6 +11,8 @@ import com.github.saschas93.simpleblockchain.entities.Block;
 import com.github.saschas93.simpleblockchain.entities.BlockBuilder;
 import com.github.saschas93.simpleblockchain.entities.Transaction;
 import com.github.saschas93.simpleblockchain.entities.TransactionBuilder;
+import com.github.saschas93.simpleblockchain.validation.Validator;
+import com.github.saschas93.simpleblockchain.validation.ValidatorFactory;
 import com.github.saschas93.simpleblockchain.wallet.Wallet;
 import com.github.saschas93.simpleblockchain.wallet.WalletFactory;
 
@@ -25,6 +27,8 @@ public class Chain {
     private List<Transaction> pendingTransactions = new ArrayList<Transaction>();
 
     private Consensus consensus = ConsensusFactory.createSimpleProofOfWork();
+
+    private Validator validator = ValidatorFactory.createSimpleValidator();
 
     public Chain() {
         // TODO: Wallet created dynamically for testing here
@@ -51,13 +55,13 @@ public class Chain {
 
         consensus.onBlockCreation(newBlock);
 
-        this.chain.add(newBlock);
+        if (this.validator.isBlockValid(newBlock)) this.chain.add(newBlock);
 
         this.pendingTransactions.clear();
     }
 
     public void addTransaction(Transaction transaction) {
-        if (this.getBalance(transaction.getFromAddress()) < transaction.getAmount() || transaction.getAmount() < 1 || !transaction.isValid()) {
+        if (this.getBalance(transaction.getFromAddress()) < transaction.getAmount() || !this.validator.isTransactionValid(transaction)) {
             // Discard transaction
             return;
         }

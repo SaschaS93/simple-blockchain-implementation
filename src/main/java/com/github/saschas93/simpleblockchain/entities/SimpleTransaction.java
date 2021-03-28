@@ -41,19 +41,6 @@ class SimpleTransaction implements Transaction {
     }
 
     @Override
-    public boolean isValid() {
-        if (this.fromAddress == "") return true;
-
-        try {
-            return CryptoUtils.isSignatureValid(signature, this.fromAddress, this.hash);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return false;
-    }
-
-    @Override
     public String getFromAddress() {
         return this.fromAddress;
     }

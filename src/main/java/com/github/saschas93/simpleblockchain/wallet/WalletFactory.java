@@ -10,4 +10,8 @@ public class WalletFactory {
         return new SimpleWallet(publicKey, privateKey);
     }
 
+    public static Wallet lookupSimpleWallet(String publicKey) {
+        return new SimpleWallet(publicKey);
+    }
+
 }

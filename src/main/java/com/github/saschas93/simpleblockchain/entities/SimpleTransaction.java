@@ -1,13 +1,6 @@
 package com.github.saschas93.simpleblockchain.entities;
 
-import java.security.KeyFactory;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.Signature;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
-import java.util.Base64;
-
+import com.github.saschas93.simpleblockchain.util.CryptoUtils;
 import com.github.saschas93.simpleblockchain.util.HashUtils;
 
 class SimpleTransaction implements Transaction {
@@ -41,21 +34,7 @@ class SimpleTransaction implements Transaction {
     @Override
     public void sign(String privateKeyString) {
         try {
-            byte[] privateBytes = Base64.getDecoder().decode(privateKeyString);
-            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateBytes);
-            KeyFactory keyFactoryPrivate = KeyFactory.getInstance("EC");
-            PrivateKey privateKey = keyFactoryPrivate.generatePrivate(keySpec);
-
-            Signature ecdsa = Signature.getInstance("SHA256withECDSA");
-
-            ecdsa.initSign(privateKey);
-    
-            byte[] strByte = this.createHash().getBytes("UTF-8");
-            ecdsa.update(strByte);
-    
-            byte[] signatureBytes = ecdsa.sign();
-
-            this.signature = Base64.getEncoder().encodeToString(signatureBytes);
+            this.signature = CryptoUtils.signString(privateKeyString, this.getHash());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,20 +45,7 @@ class SimpleTransaction implements Transaction {
         if (this.fromAddress == "") return true;
 
         try {
-            Signature ecdsa = Signature.getInstance("SHA256withECDSA");
-
-            byte[] publicKeyBytes = Base64.getDecoder().decode(this.fromAddress);
-            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicKeyBytes);
-            KeyFactory keyFactory = KeyFactory.getInstance("EC");
-            PublicKey publicKey = keyFactory.generatePublic(keySpec);
-
-            ecdsa.initVerify(publicKey);
-            byte[] strByte = this.hash.getBytes("UTF-8");
-            ecdsa.update(strByte);
-
-            byte[] signature = Base64.getDecoder().decode(this.signature);
-
-            return ecdsa.verify(signature);
+            return CryptoUtils.isSignatureValid(signature, this.fromAddress, this.hash);
         } catch (Exception e) {
             e.printStackTrace();
         }

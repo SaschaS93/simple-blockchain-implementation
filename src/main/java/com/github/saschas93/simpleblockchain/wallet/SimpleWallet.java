@@ -1,14 +1,10 @@
 package com.github.saschas93.simpleblockchain.wallet;
 
 import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.SecureRandom;
-import java.security.spec.ECGenParameterSpec;
-import java.util.Base64;
 
 import com.github.saschas93.simpleblockchain.entities.Transaction;
 import com.github.saschas93.simpleblockchain.entities.TransactionBuilder;
-import com.github.saschas93.simpleblockchain.util.HashUtils;
+import com.github.saschas93.simpleblockchain.util.CryptoUtils;
 
 class SimpleWallet implements Wallet {
 
@@ -19,13 +15,9 @@ class SimpleWallet implements Wallet {
     SimpleWallet() {
         // Create new wallet
         try {
-            KeyPairGenerator keyGen = KeyPairGenerator.getInstance("EC");
-
-            keyGen.initialize(new ECGenParameterSpec("secp256r1"), new SecureRandom());
-
-            KeyPair keyPair = keyGen.generateKeyPair();
-            this.publicKey = Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
-            this.privateKey = Base64.getEncoder().encodeToString(keyPair.getPrivate().getEncoded());
+            KeyPair keyPair = CryptoUtils.generateKeyPair();
+            this.publicKey = CryptoUtils.bytesToBase64String(keyPair.getPublic().getEncoded());
+            this.privateKey = CryptoUtils.bytesToBase64String(keyPair.getPrivate().getEncoded());
         } catch (Exception e) {
             e.printStackTrace();
         }

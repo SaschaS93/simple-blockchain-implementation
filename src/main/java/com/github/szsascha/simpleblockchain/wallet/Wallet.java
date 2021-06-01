@@ -1,7 +1,7 @@
-package com.github.saschas93.simpleblockchain.wallet;
+package com.github.szsascha.simpleblockchain.wallet;
 
-import com.github.saschas93.simpleblockchain.chain.Chain;
-import com.github.saschas93.simpleblockchain.entities.Transaction;
+import com.github.szsascha.simpleblockchain.chain.Chain;
+import com.github.szsascha.simpleblockchain.entities.Transaction;
 
 public interface Wallet {
     

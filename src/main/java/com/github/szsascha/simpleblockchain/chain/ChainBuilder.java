@@ -1,7 +1,7 @@
-package com.github.saschas93.simpleblockchain.chain;
+package com.github.szsascha.simpleblockchain.chain;
 
-import com.github.saschas93.simpleblockchain.consensus.Consensus;
-import com.github.saschas93.simpleblockchain.validation.Validator;
+import com.github.szsascha.simpleblockchain.consensus.Consensus;
+import com.github.szsascha.simpleblockchain.validation.Validator;
 
 public class ChainBuilder {
     

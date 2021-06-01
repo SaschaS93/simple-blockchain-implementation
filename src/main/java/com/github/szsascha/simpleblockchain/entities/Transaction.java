@@ -1,4 +1,4 @@
-package com.github.saschas93.simpleblockchain.entities;
+package com.github.szsascha.simpleblockchain.entities;
 
 public interface Transaction {
     

@@ -1,6 +1,6 @@
-package com.github.saschas93.simpleblockchain.consensus;
+package com.github.szsascha.simpleblockchain.consensus;
 
-import com.github.saschas93.simpleblockchain.wallet.Wallet;
+import com.github.szsascha.simpleblockchain.wallet.Wallet;
 
 public class ConsensusFactory {
     

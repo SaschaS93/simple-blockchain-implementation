@@ -1,12 +1,12 @@
-package com.github.saschas93.simpleblockchain.wallet;
+package com.github.szsascha.simpleblockchain.wallet;
 
 import java.security.KeyPair;
 
-import com.github.saschas93.simpleblockchain.chain.Chain;
-import com.github.saschas93.simpleblockchain.entities.Block;
-import com.github.saschas93.simpleblockchain.entities.Transaction;
-import com.github.saschas93.simpleblockchain.entities.TransactionBuilder;
-import com.github.saschas93.simpleblockchain.util.CryptoUtils;
+import com.github.szsascha.simpleblockchain.chain.Chain;
+import com.github.szsascha.simpleblockchain.entities.Block;
+import com.github.szsascha.simpleblockchain.entities.Transaction;
+import com.github.szsascha.simpleblockchain.entities.TransactionBuilder;
+import com.github.szsascha.simpleblockchain.util.CryptoUtils;
 
 class SimpleWallet implements Wallet {
 

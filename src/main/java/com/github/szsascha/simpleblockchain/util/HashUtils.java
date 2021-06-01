@@ -1,4 +1,4 @@
-package com.github.saschas93.simpleblockchain.util;
+package com.github.szsascha.simpleblockchain.util;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

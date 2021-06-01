@@ -1,10 +1,10 @@
-package com.github.saschas93.simpleblockchain.consensus;
+package com.github.szsascha.simpleblockchain.consensus;
 
-import com.github.saschas93.simpleblockchain.entities.Block;
-import com.github.saschas93.simpleblockchain.entities.Transaction;
-import com.github.saschas93.simpleblockchain.entities.TransactionBuilder;
-import com.github.saschas93.simpleblockchain.util.HashUtils;
-import com.github.saschas93.simpleblockchain.wallet.Wallet;
+import com.github.szsascha.simpleblockchain.entities.Block;
+import com.github.szsascha.simpleblockchain.entities.Transaction;
+import com.github.szsascha.simpleblockchain.entities.TransactionBuilder;
+import com.github.szsascha.simpleblockchain.util.HashUtils;
+import com.github.szsascha.simpleblockchain.wallet.Wallet;
 
 class SimpleProofOfWork implements Consensus {
 

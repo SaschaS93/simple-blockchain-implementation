@@ -1,14 +1,14 @@
-package com.github.saschas93.simpleblockchain.chain;
+package com.github.szsascha.simpleblockchain.chain;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.saschas93.simpleblockchain.consensus.Consensus;
-import com.github.saschas93.simpleblockchain.entities.Block;
-import com.github.saschas93.simpleblockchain.entities.BlockBuilder;
-import com.github.saschas93.simpleblockchain.entities.Transaction;
-import com.github.saschas93.simpleblockchain.util.TimestampUtil;
-import com.github.saschas93.simpleblockchain.validation.Validator;
+import com.github.szsascha.simpleblockchain.consensus.Consensus;
+import com.github.szsascha.simpleblockchain.entities.Block;
+import com.github.szsascha.simpleblockchain.entities.BlockBuilder;
+import com.github.szsascha.simpleblockchain.entities.Transaction;
+import com.github.szsascha.simpleblockchain.util.TimestampUtil;
+import com.github.szsascha.simpleblockchain.validation.Validator;
 
 class SimpleChain implements Chain {
 

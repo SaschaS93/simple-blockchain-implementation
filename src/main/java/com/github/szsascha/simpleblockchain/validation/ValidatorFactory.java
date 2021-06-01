@@ -1,4 +1,4 @@
-package com.github.saschas93.simpleblockchain.validation;
+package com.github.szsascha.simpleblockchain.validation;
 
 public class ValidatorFactory {
     

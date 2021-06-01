@@ -1,7 +1,7 @@
-package com.github.saschas93.simpleblockchain.entities;
+package com.github.szsascha.simpleblockchain.entities;
 
-import com.github.saschas93.simpleblockchain.util.CryptoUtils;
-import com.github.saschas93.simpleblockchain.util.HashUtils;
+import com.github.szsascha.simpleblockchain.util.CryptoUtils;
+import com.github.szsascha.simpleblockchain.util.HashUtils;
 
 class SimpleTransaction implements Transaction {
 

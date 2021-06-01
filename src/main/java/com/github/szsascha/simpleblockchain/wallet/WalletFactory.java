@@ -1,4 +1,4 @@
-package com.github.saschas93.simpleblockchain.wallet;
+package com.github.szsascha.simpleblockchain.wallet;
 
 public class WalletFactory {
     

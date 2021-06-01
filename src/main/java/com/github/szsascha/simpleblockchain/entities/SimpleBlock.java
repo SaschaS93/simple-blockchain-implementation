@@ -1,9 +1,9 @@
-package com.github.saschas93.simpleblockchain.entities;
+package com.github.szsascha.simpleblockchain.entities;
 
 import java.sql.Timestamp;
 import java.util.List;
 
-import com.github.saschas93.simpleblockchain.util.HashUtils;
+import com.github.szsascha.simpleblockchain.util.HashUtils;
 
 class SimpleBlock implements Block {
 

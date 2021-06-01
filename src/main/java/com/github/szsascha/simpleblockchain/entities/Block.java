@@ -1,4 +1,4 @@
-package com.github.saschas93.simpleblockchain.entities;
+package com.github.szsascha.simpleblockchain.entities;
 
 import java.sql.Timestamp;
 import java.util.List;
